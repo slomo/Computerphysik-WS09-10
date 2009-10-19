@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 #define MAXSAMPELS 5
 // this programm has to be linked with -lm options

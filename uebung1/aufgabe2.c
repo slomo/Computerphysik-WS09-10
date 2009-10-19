@@ -1,5 +1,4 @@
-#include<stdio.h>
-
+#include <stdio.h>
 
 double mAcc(int alpha){
     double eps=1;
