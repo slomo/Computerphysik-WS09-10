@@ -7,10 +7,10 @@ double mAcc(int alpha){
         eps /= 2;
 
     }
-    return(eps*2);
+    return (eps*2);
 }
 
-int main(int argc,int args[]){
+int main(int arg,char* args[]){
     int i;
     double alphas[]= {1,1e-4,10e11};
 
@@ -18,6 +18,8 @@ int main(int argc,int args[]){
         fprintf(stdout,"Machine accurracy for alpha = %E is %E\r\n",
                 alphas[i],mAcc(alphas[i]));
     }
+
+    return 0;
 }
 
 

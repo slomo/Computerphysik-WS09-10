@@ -11,4 +11,6 @@ int main(int argc,char *args[]) {
         putc(string[i],stdout);
     }
     putc('\n',stdout);
+
+    return 0;
 }

@@ -28,6 +28,8 @@ int main(int argc,char *args[]){
     stddev /= MAXSAMPELS-1;
     stddev = sqrt(stddev);
     fprintf(stdout,"The standart devitation is: %e\r\n",stddev);
+
+    return 0;
 }
 
 
