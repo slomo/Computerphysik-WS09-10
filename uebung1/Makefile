@@ -1,4 +1,4 @@
-all: clean aufgabe1 aufgabe2 aufgabe3 aufgabe4 aufgabe5
+all: aufgabe1 aufgabe2 aufgabe3 aufgabe4 aufgabe5
 
 aufgabe1:
 	 $(CC) -Wall -o aufgabe1 aufgabe1.c
