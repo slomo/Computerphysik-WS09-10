@@ -1,4 +1,4 @@
-all: clean aufgabe1 aufgabe2 aufgabe3 aufgabe4
+all: clean aufgabe1 aufgabe2 aufgabe3 aufgabe4 aufgabe5
 
 aufgabe1:
 	 $(CC) -Wall -o aufgabe1 aufgabe1.c
@@ -12,5 +12,8 @@ aufgabe3:
 aufgabe4:
 	 $(CC) -Wall -lm -o aufgabe4 aufgabe4.c
 
+aufgabe5:
+	 $(CC) -Wall -lm -o aufgabe5 aufgabe5.c
+
 clean:
-	rm aufgabe1 aufgabe2 aufgabe3 aufgabe4
+	rm aufgabe1 aufgabe2 aufgabe3 aufgabe4 aufgabe5
