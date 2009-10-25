@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(int argc,char* args[]) {
+int main(int argc,char *args[]) {
     fprintf(stdout,"Size of some datatypes\r\n");
     fprintf(stdout,"=================================================\r\n");
     fprintf(stdout,"\t character: \t %d byte\r\n",sizeof(char));

@@ -14,20 +14,18 @@ int main(int argc,char *args[]){
         fscanf(stdin,"%lf",(set+i));
     }
     
-    // compute avarage
+    // compute average
     for(i=MAXSAMPELS;i>=0;i--){
         avg += set[i];
     }
     avg /= MAXSAMPELS;
-    fprintf(stdout,"The Avarge is: %e\r\n",avg);
+    fprintf(stdout,"The average is: %e\r\n",avg);
 
-    // compute standart devitation
+    // compute standard deviation
     for(i=0;i<5;i++){
         stddev += pow((set[i] - avg),2);
     }
     stddev /= MAXSAMPELS-1;
     stddev = sqrt(stddev);
-    fprintf(stdout,"The standart devitation is: %e\r\n",stddev);
+    fprintf(stdout,"The standard deviation is: %e\r\n",stddev);
 }
-
-
