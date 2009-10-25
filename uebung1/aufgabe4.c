@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 #define MAXSAMPELS 5
 // this programm has to be linked with -lm options
@@ -27,5 +27,11 @@ int main(int argc,char *args[]){
     }
     stddev /= MAXSAMPELS-1;
     stddev = sqrt(stddev);
+<<<<<<< HEAD:uebung1/aufgabe4.c
     fprintf(stdout,"The standard deviation is: %e\r\n",stddev);
+=======
+    fprintf(stdout,"The standart devitation is: %e\r\n",stddev);
+
+    return 0;
+>>>>>>> b045ca24735bf26a438011ef079036c74fd56d48:uebung1/aufgabe4.c
 }
