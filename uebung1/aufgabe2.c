@@ -21,6 +21,14 @@ int main(int arg,char* args[]){
     return 0;
 }
 
+/*
+ * Anwser to the Questions:
+ *
+ * The machine accuracy discribes the smallest presentable difference 
+ * between alpha and an other value. If we don't divde epsilon by two,
+ * it could be possible the we have to stop earlier, so we won't have
+ * the exact accuracy.
+ */
 
 
 
