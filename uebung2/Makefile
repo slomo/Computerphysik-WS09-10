@@ -1,7 +1,7 @@
 all: aufgabe2_2 aufgabe2_4 aufgabe2_6 aufgabe2_4_with_gmp
 
 aufgabe2_2:
-	 $(CC) -Wall -o aufgabe2_2 aufgabe2_2.c
+	 $(CC) -Wall -lm -o aufgabe2_2 aufgabe2_2.c
 
 aufgabe2_4:
 	 $(CC) -Wall -lm -o aufgabe2_4 aufgabe2_4.c
