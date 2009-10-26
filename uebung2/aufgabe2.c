@@ -6,7 +6,7 @@
 #define LIMIT powl(10,9)
 
 /* 
- * We took the formular for the exact value from wikipedia.
+ * We took the formular for the expected value from wikipedia.
  * http://en.wikipedia.org/wiki/Harmonic_series_(mathematics)
  *
  * The constant value is an approximation of the Euler–Mascheroni constant.
@@ -33,9 +33,9 @@ int main(int argc,char *args[]){
         }
         
         fprintf(out,"[%lld][%lld]\r\n\
-            \tSup: \t%.9E\r\n\
-            \tSdown: \t%.9E\r\n\
-            \tExact: \t%.9E\r\n"
+            \tSup: \t%.20E\r\n\
+            \tSdown: \t%.20E\r\n\
+            \tExp: \t%.20E\r\n"
             ,up,down,sumUp,sumDown,log(i)+0.5772156649);
         fprintf(stdout,"Results have been writen to file\r\n");
     }
@@ -44,3 +44,12 @@ int main(int argc,char *args[]){
     fclose(out);
     return EXIT_SUCCESS;
 }
+
+/*
+ * The above Implemantation is not the utmost performant implemantation,
+ * but it should be best to show the desired effect, even if the differences
+ * between those two resaults are not signifcant (that should be caused by the 
+ * usage of double precission.
+ */
+
+
