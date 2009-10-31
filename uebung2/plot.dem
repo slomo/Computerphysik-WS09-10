@@ -1,5 +1,8 @@
 # plot.dem
 set log xy
+set term postscript enhanced color
+#set term post
+set out "plot.ps"
 plot "sup.data" with point title "summation upwards" \
     ,"sdown.data" with points title "summation downwards" \
     , log(x) + 0.5772156649 title "ln(x) + gamma"
