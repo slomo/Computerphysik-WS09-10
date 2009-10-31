@@ -3,8 +3,8 @@ set log xy
 set term postscript enhanced color
 #set term post
 set out "plot.ps"
-plot "sup.data" with point title "summation upwards" \
-    ,"sdown.data" with points title "summation downwards" \
+plot "aufgabe2_3.sup.data" with point title "summation upwards" \
+    ,"aufgabe2_3.sdown.data" with points title "summation downwards" \
     , log(x) + 0.5772156649 title "ln(x) + gamma"
 pause -1 "Hit any key or press \OK to continue ..."
  

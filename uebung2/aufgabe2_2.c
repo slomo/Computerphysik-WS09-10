@@ -16,11 +16,12 @@
 int main(int argc,char *args[]){
     
     long long int i,down,up;
-    FILE *f_sup,*f_sdown;
-    double sumUp,sumDown;
+    FILE *f_sup,*f_sdown,*f_div;
+    float sumUp,sumDown;
 
-    f_sup = fopen("sup.data","w");
-    f_sdown = fopen("sdown.data","w");
+    f_sup   = fopen("aufgabe2_3.sup.data","w");
+    f_sdown = fopen("aufgabe2_3.sdown.data","w");
+    f_div   = fopen("aufgabe2_3.div.data","w");
 
     for(i=10;i<LIMIT;i *=10){
         sumUp=0;
@@ -35,6 +36,8 @@ int main(int argc,char *args[]){
         
         fprintf(f_sup,"%lld %.20E\r\n",i,sumUp);
         fprintf(f_sdown,"%lld %.20E\r\n",i,sumDown);
+        fprintf(f_div,"%lld %.20E\r\n",i
+                ,abs(sumUp-sumDown)/(sumUp+sumDown));
         
         fprintf(stdout,"[%lld]\r\n\
             \tSup: \t%.20E\r\n\
@@ -47,6 +50,7 @@ int main(int argc,char *args[]){
 
     fclose(f_sup);
     fclose(f_sdown);
+    fclose(f_div);
     return EXIT_SUCCESS;
 }
 
