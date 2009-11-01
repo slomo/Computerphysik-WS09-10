@@ -16,32 +16,41 @@
 int main(int argc,char *args[]){
     
     long long int i,down,up;
-    FILE* out;
-    double sumUp,sumDown;
+    FILE *f_sup,*f_sdown,*f_div;
+    float sumUp,sumDown;
 
-    out = fopen("output.tmp","w");
-    
+    f_sup   = fopen("aufgabe2_3.sup.data","w");
+    f_sdown = fopen("aufgabe2_3.sdown.data","w");
+    f_div   = fopen("aufgabe2_3.div.data","w");
+
     for(i=10;i<LIMIT;i *=10){
         sumUp=0;
         sumDown=0;
 
-        for(down=i;down>0;down --){
+        for(down=i;down>0;down--){
             sumDown +=  1/((double) down);
         }
         for(up=0;up<i;up++){
             sumUp +=  1/(up+1.0);
         }
         
-        fprintf(out,"[%lld][%lld]\r\n\
+        fprintf(f_sup,"%lld %.20E\r\n",i,sumUp);
+        fprintf(f_sdown,"%lld %.20E\r\n",i,sumDown);
+        fprintf(f_div,"%lld %.20E\r\n",i
+                ,abs(sumUp-sumDown)/(sumUp+sumDown));
+        
+        fprintf(stdout,"[%lld]\r\n\
             \tSup: \t%.20E\r\n\
             \tSdown: \t%.20E\r\n\
-            \tExp: \t%.20E\r\n"
-            ,up,down,sumUp,sumDown,log(i)+0.5772156649);
+            \tExp: \t%.9E\r\n"
+            ,i,sumUp,sumDown,log(i)+0.5772156649);
         fprintf(stdout,"Results have been writen to file\r\n");
     }
     
 
-    fclose(out);
+    fclose(f_sup);
+    fclose(f_sdown);
+    fclose(f_div);
     return EXIT_SUCCESS;
 }
 
