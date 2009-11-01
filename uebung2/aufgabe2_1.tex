@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper,notitlepage,onecolumn]{article}
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\title{Aufgabe2\_1}
+\author{Robin Nehls, Yves Müller\\
+  Freie Universit\"at Berlin\\
+  nehls@spline.de uves@spline.de }
+\date{}
+\begin{document}
+
+\maketitle
+
+\paragraph{}
+{\scriptsize (Computation via erlang shell, which should guarantee 
+unlimited accuracy)}
+
+\section*{Algorithm 1}
+\paragraph{}
+$K_{00}=\frac{a}{a^2}\cdot\frac{\partial a^2}{\partial a}
+=\frac{1}{a}\cdot a
+=1$ 
+
+\paragraph{}
+$K_{01}=\frac{b}{b}\cdot\frac{\partial b}{\partial b}
+=1\cdot1
+=1$
+
+\paragraph{}
+$K_{10}=\frac{a}{a}\cdot\frac{\partial a}{\partial a}
+=1\cdot1
+=1$
+
+\paragraph{}
+$K_{11}=\frac{b}{b^2}\cdot\frac{\partial b^2}{\partial b}
+=\frac{1}{b}\cdot b
+=1$
+
+\paragraph{}
+$K_{21}=\frac{\eta_1}{\eta_1-\eta_2}
+\cdot\frac{\partial \eta_1-\eta_2}{\partial \eta_1}
+=\frac{\eta_1}{\eta_1-\eta_2}\cdot(1-0)
+=\frac{0.14666249202118384}{8.425204978124157\cdot10^{-13}}
+\approx 17.4 \cdot 10^{10}
+$
+
+\section*{Algorithm 2}
+\paragraph{}
+$K_{00}=\frac{a}{a}\cdot\frac{\partial a}{\partial a}
+=1\cdot1
+=1$       $K_{01}=\frac{b}{b}\cdot\frac{\partial b}{\partial b}
+=1\cdot1
+=1$
+
+\paragraph{}
+$K_{02a}=\frac{a}{a+b}\cdot\frac{\partial a+b}{\partial a}
+=\frac{a}{a+b}\cdot(1+0)
+=\frac{0.38296539272}{0.7659307854389}
+\approx 0.5
+$
+
+\paragraph{}
+($K_{02b}=\frac{b}{a+b}\cdot\frac{\partial a+b}{\partial b}
+\approx 0.5$ 
+
+\paragraph{}
+$K_{02}=K_{02b}+K_{02a}$ (With that step I am not absolutely sure.)
+
+\paragraph{}
+$K_{10}=\frac{\eta_1}{\eta_1}\cdot\frac{\partial \eta_1}{\partial \eta_1}
+=1\cdot1
+=1$
+
+\paragraph{}
+$K_{12a}=\frac{a}{a-b}\cdot\frac{\partial a-b}{\partial a}
+=\frac{a}{a-b}\cdot(1-0)
+\approx 3.48 \cdot 10^{10}
+$
+
+\paragraph{}
+$K_{12b}=\frac{b}{a-b}\cdot\frac{\partial a-b}{\partial b}
+\approx - K_{12a}$ (with $K_{12}$ same Problem as $K_{02}$)
+
+
+\paragraph{}
+$K_{20}=\frac{\eta_1}{\eta_1\cdot\eta_2}
+\cdot\frac{\partial \eta_1\cdot\eta_2}{\partial \eta_1}
+=\frac{1}{\eta_2}\cdot\eta_2=1$
+
+\paragraph{}
+(same with 
+$K_{20}=\frac{\eta_2}{\eta_2\cdot\eta_1}
+\cdot\frac{\partial \eta_2\cdot\eta_1}{\partial \eta_2}
+$)
+
+
+
+\end{document}
