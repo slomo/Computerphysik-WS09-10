@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #ifdef GMP
 
@@ -66,21 +67,31 @@ void fak_gmp(mpz_t *x)
 int main(int argc, char* argv[])
 {
     if(argc==2) {
-        int n = atoi(argv[1]); //get value from agrument
-        printf("Fak(%d) useing Integer : %d\n",n,fak_int(n));
-        printf("Fak(%d) useing Float   : %.0f\n",n,fak_float(n));
-        printf("Fak(%d) useing Double  : %.0f\n",n,fak_double(n)); 
-        printf("Fak(%d) useing Stirling: %.0f\n",n,fak_stirling(n));
+        int n;
+        //When -p is given as a parameter, print plotable values for n=(10,20,...,100)
+        if (!strcmp(argv[1],"-p")) {
+            for (n=10;n<=100;n+=10){
+                printf("%d %.0f %.0f\n",n,fak_double(n),fak_stirling(n));
+            }
+        }
+        else {
+            n = atoi(argv[1]); //get value from agrument
+        
+            printf("Fak(%d) useing Integer : %d\n",n,fak_int(n));
+            printf("Fak(%d) useing Float   : %.0f\n",n,fak_float(n));
+            printf("Fak(%d) useing Double  : %.0f\n",n,fak_double(n)); 
+            printf("Fak(%d) useing Stirling: %.0f\n",n,fak_stirling(n));
 
-        #ifdef GMP
-	    mpz_t num;
-	    mpz_init_set_str (num, argv[1], 10);
-		fak_gmp(&num);
-		printf("Fak(%d) useing GMP     : ",n);
-		mpz_out_str(NULL,10,num);
-		printf("\n");
-	    mpz_clear(num);
-        #endif
+            #ifdef GMP
+    	    mpz_t num;
+    	    mpz_init_set_str (num, argv[1], 10);
+    		fak_gmp(&num);
+    		printf("Fak(%d) useing GMP     : ",n);
+    		mpz_out_str(NULL,10,num);
+    		printf("\n");
+    	    mpz_clear(num);
+            #endif
+        }
     }
     else {
 
