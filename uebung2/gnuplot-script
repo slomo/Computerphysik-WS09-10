@@ -1,2 +1,0 @@
-set logscale y
-plot "plot.dat" using 1:2 title 'Double' with lines, "plot.dat" using 1:3 title 'Stirling' with lines

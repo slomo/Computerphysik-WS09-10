@@ -13,7 +13,6 @@ int fak(int x)
 //(n r) = n! / r!(n-r)!
 int binom1(int n,int r)
 {
-    printf("%d, %d, %d\n",fak(n),fak(r),fak(r)*fak(n-r));
     return fak(n) / (fak(r) * fak(n-r));
 }
 

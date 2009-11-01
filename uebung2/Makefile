@@ -14,4 +14,4 @@ aufgabe2_4_with_gmp:
 	$(CC) -Wall -lm -lgmp -o aufgabe2_4_gmp -DGMP aufgabe2_4.c
 
 clean:
-	rm aufgabe2_2 aufgabe2_4 aufgabe2_6
+	rm aufgabe2_2 aufgabe2_4 aufgabe2_6 aufgabe2_4_gmp
