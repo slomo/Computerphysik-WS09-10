@@ -3,9 +3,10 @@
 #include <math.h>
 #include <string.h>
 
-#define A = -1
-#define B = 1
-#define X = pi() /4
+#define A -1
+#define B 1
+#define PI 3.14159265
+#define X PI/4
 
 double f(double x)
 {
@@ -24,7 +25,7 @@ void distribute_tschebyscheff(double *x, int n)
 { 
     int i;
     for(i=0;i<=n;++i){
-        x[i]=-cos(((i+0.5)/(n+1))*pi());
+        x[i]=cos(((i+0.5)/(n+1))*PI);
     }
 }
 
@@ -33,14 +34,9 @@ int main(int argc, char* argv[])
     int n = atoi(argv[2]);
     int i,j;
     double p;
-    double t[22];
-    double a[22];
-    double x[22];
-    /*
     double *t = malloc(sizeof(double)*n);
     double *a = malloc(sizeof(double)*n);
     double *x = malloc(sizeof(double)*n);
-    */
 
     if(argc==3) {
         if(!strcmp(argv[1],"-l")) {
@@ -55,7 +51,7 @@ int main(int argc, char* argv[])
             t[i]=f(x[i]);
             if(i>=1) {
                 for(j=i-1;j>=0;--j) {
-                    t[x]=(t[j+1]-t[j])/(x[i]-x[j]);
+                    t[i]=(t[j+1]-t[j])/(x[i]-x[j]);
                 }
             }
             a[i]=t[0];
@@ -70,19 +66,15 @@ int main(int argc, char* argv[])
 
         printf("n=%d\nx=%f\np=%f\n",n,X,p);
 
-        /*
         free(t);
         free(a);
         free(x);
-        */
     }
     else {
         printf("Usage: %s <-l|-t> <n>\n-l Linear distribution\n-t Tschebyscheff distribution\n",argv[0]);
-        /*
         free(t);
         free(a);
         free(x);
-        */
     }
 
     return EXIT_SUCCESS;
