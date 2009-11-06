@@ -39,9 +39,9 @@ int main(int argc, char* argv[])
         
         n = atoi(argv[2]);
         
-        t = malloc(sizeof(double)*n);
-        a = malloc(sizeof(double)*n);
-        x = malloc(sizeof(double)*n);
+        t = malloc((sizeof(double)*(n+1)));
+        a = malloc((sizeof(double)*(n+1)));
+        x = malloc((sizeof(double)*(n+1)));
 
         if(!strcmp(argv[1],"-l")) {
             distribute_linear(x,n);
@@ -70,9 +70,9 @@ int main(int argc, char* argv[])
 
         printf("n=%d\nx=%f\np=%f\n",n,X,p);
 
-        //free(t);
-        //free(a);
-        //free(x);
+        free(t);
+        free(a);
+        free(x);
     }
     else {
         printf("Usage: %s <-l|-t> <n>\n-l Linear distribution\n-t Tschebyscheff distribution\n",argv[0]);
