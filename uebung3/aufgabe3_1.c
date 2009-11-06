@@ -31,21 +31,25 @@ void distribute_tschebyscheff(double *x, int n)
 
 int main(int argc, char* argv[])
 {
-    int n = atoi(argv[2]);
-    int i,j;
+    int n,i,j;
     double p;
-    double *t = malloc(sizeof(double)*n);
-    double *a = malloc(sizeof(double)*n);
-    double *x = malloc(sizeof(double)*n);
+    double *t,*a,*x;
 
     if(argc==3) {
+        
+        n = atoi(argv[2]);
+        
+        t = malloc(sizeof(double)*n);
+        a = malloc(sizeof(double)*n);
+        x = malloc(sizeof(double)*n);
+
         if(!strcmp(argv[1],"-l")) {
             distribute_linear(x,n);
         }
         if(!strcmp(argv[1],"-t")) {
             distribute_tschebyscheff(x,n);
         }
-    
+        
         //Algo Start
         for(i=0;i<=n;++i) {
             t[i]=f(x[i]);
@@ -66,15 +70,12 @@ int main(int argc, char* argv[])
 
         printf("n=%d\nx=%f\np=%f\n",n,X,p);
 
-        free(t);
-        free(a);
-        free(x);
+        //free(t);
+        //free(a);
+        //free(x);
     }
     else {
         printf("Usage: %s <-l|-t> <n>\n-l Linear distribution\n-t Tschebyscheff distribution\n",argv[0]);
-        free(t);
-        free(a);
-        free(x);
     }
 
     return EXIT_SUCCESS;
