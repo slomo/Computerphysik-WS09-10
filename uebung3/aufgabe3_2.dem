@@ -2,6 +2,8 @@
 
 set yrange[0:4.5]
 set xrange[-1:1]
+set term postscript enhanced color
+set out "aufgabe3_2.ps"
 plot 5/(1+25*x*x)
 pause -1 "Press any key!"
 
