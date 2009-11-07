@@ -3,8 +3,9 @@
 #include <math.h>
 #include <string.h>
 
-#define A -1
-#define B 1
+#define A -1.0
+#define B 1.0
+#define PROBEC 500.0
 #define PI 3.14159265
 #define X (PI/4)
 
@@ -36,7 +37,7 @@ void compute_polynomial(double *x,double *t,int n,double *a){
         t[i]=f(x[i]);
         if(i>=1) {
             for(j=i-1;j>=0;--j) {
-                t[i]=(t[j+1]-t[j])/(x[i]-x[j]);
+                t[j]=(t[j+1]-t[j])/(x[i]-x[j]);
             }
         }
             a[i]=t[0];
@@ -87,7 +88,7 @@ int main(int argc, char* argv[])
 
         file = fopen(filename,"w");
         // and write them to file
-        for(probe=-1;probe<=1;probe+=(1.0/250.0)){
+        for(probe=A;probe<=B;probe+=((B-A)/PROBEC)){
             fprintf(file,"%.20E %.20E\r\n",probe,compute_horner(probe,x,a,n));
         }
         fclose(file);
