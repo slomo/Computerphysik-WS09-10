@@ -3,8 +3,8 @@
 #include <math.h>
 #include <string.h>
 
-#define A -1
-#define B 1
+#define A -1.0
+#define B 1.0
 #define PI 3.14159265
 #define X (PI/4)
 
@@ -36,7 +36,7 @@ void compute_polynomial(double *x,double *t,int n,double *a){
         t[i]=f(x[i]);
         if(i>=1) {
             for(j=i-1;j>=0;--j) {
-                t[i]=(t[j+1]-t[j])/(x[i]-x[j]);
+                t[j]=(t[j+1]-t[j])/(x[i]-x[j]);
             }
         }
             a[i]=t[0];
