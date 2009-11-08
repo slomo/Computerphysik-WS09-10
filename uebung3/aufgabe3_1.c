@@ -15,10 +15,10 @@
  * The rounded value of f(PI/4) is 0.30448
  * Here now the results for our interpolation
  *
- * #IValues p(X)lin p(X)tsh
- * 5        0.21491 0.19445
- * 12       2.69779 0.17126
- * 22       5.13411 0.327702
+ * #IValues p(X)lin delta   p(X)tsh delta
+ * 5       -0.21491 0.51839 0.19445 0.11003
+ * 12       2.69779 2.39331 0.17126 0.13322
+ * 22       5.13411 4.82963 0.32770 0.02186
  *
  * It cann be seen that the best approch to the actual value comes
  * with tschebyscheff distribution and 22 interpolation vaules, wich
@@ -74,7 +74,7 @@ double compute_horner(double *x,double *a,int n){
 int main(int argc, char* argv[])
 {
     int n;
-    double *t,*a,*x;
+    double *t,*a,*x,result;
 
     if(argc==3) {
         
@@ -93,7 +93,9 @@ int main(int argc, char* argv[])
         
         compute_polynomial(x,t,n,a);
 
-        printf("n=%d\nx=%f\np=%f\n",n,X,compute_horner(x,a,n));
+        result=compute_horner(x,a,n);
+
+        printf("n=%d\nx=%f\np=%f\ndelta=%E\n",n,X,result,fabs(result-f(X)));
 
         free(t);
         free(a);
