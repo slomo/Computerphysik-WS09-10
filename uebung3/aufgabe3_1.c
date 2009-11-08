@@ -8,6 +8,24 @@
 #define PI 3.14159265
 #define X (PI/4)
 
+/*
+ * The value PI/4 is close to the borders of the interval, so the 
+ * oscillation can become a disturbing factor, especally with 
+ * linear distribution.
+ * The rounded value of f(PI/4) is 0.30448
+ * Here now the results for our interpolation
+ *
+ * #IValues p(X)lin p(X)tsh
+ * 5        0.21491 0.19445
+ * 12       2.69779 0.17126
+ * 22       5.13411 0.327702
+ *
+ * It cann be seen that the best approch to the actual value comes
+ * with tschebyscheff distribution and 22 interpolation vaules, wich
+ * goes along with the results from task 2.
+ */
+
+
 double f(double x)
 {
     return 5/(1+25*x*x);
