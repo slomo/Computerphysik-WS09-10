@@ -20,6 +20,16 @@ double f(double x)
     return (sqrt(x));
 }
 
+double fak(double x){
+    int i;
+    double result = 1;
+    for(i=1;i<=x;i++){
+        result *= i;
+    }
+    return(result);
+}
+
+
 void distribute_linear(double *x, int n)
 {
     int i;
@@ -57,8 +67,8 @@ double compute_horner(double probe,double *x,double *a,int n){
 
 int main(int argc, char* argv[])
 {
-    int n;
-    double probe,result;
+    int n,i;
+    double probe,result,faktor,err,tmp;
     double *t,*a,*x;
 
     FILE *fErr, *fRes;
@@ -95,13 +105,37 @@ int main(int argc, char* argv[])
         distribute_linear(x,n);
         compute_polynomial(x,t,n,a);
         
-        // get result for the probes and get absolute error and wirte to file
+        // computing max error
+        faktor=1;
+        for(i;i<=n;i++){
+            faktor *= (1 + 2*i);
+        }
+        faktor *= 0.25 * powf(-1,n);
+        faktor /= fak(n);
+        err = 0;
+        for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
+            tmp = faktor * powf(probe,(-(2.0*n-1.0)/2.0));
+            if(tmp > err){
+                err = tmp;
+            }
+        }
+
+        for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
+            // whar goes here????
+        }
+
+
         for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
             result = compute_horner(probe,x,a,n);
             fprintf(fRes,"%.20E %.20E\r\n",probe,result);
             fprintf(fErr,"%.20E %.20E\r\n",probe,fabs(result-f(probe)));
         }
+        for(;probe<=B;probe+=(X1/PROBEC)){
+            fprintf(fRes,"%.20E %.20E\r\n",probe,result);
+        }
         
+        
+
         fclose(fRes);
         fclose(fErr);
         
@@ -113,6 +147,5 @@ int main(int argc, char* argv[])
         printf("Usage: %s <n> output is written to lin.data and tsc.data \r\n",
             argv[0]);
     }
-
     return EXIT_SUCCESS;
 }
