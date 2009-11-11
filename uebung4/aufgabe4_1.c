@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <float.h>
 
 #define A 0.0
 #define B 1.0
@@ -65,6 +66,31 @@ double compute_horner(double probe,double *x,double *a,int n){
     return p;
 }
 
+double compute_max_error(double s,double e,int n){
+    // get faktor (see .pdf for additional info)
+    double faktor,xi,max,tmp = 1;
+    int i;
+    faktor = (-1) * ((n+1)%2); // efficient way for (-1)^n+1
+    for(i=1;i<=(n+1);i++){
+        faktor *= 1.0-(3.0/(2.0*i));
+    }
+
+    max=-DBL_MAX;
+    for(xi=s;xi<=e;xi=+(X1/PROBEC)){
+        tmp = faktor * pow(xi,(n+1)-0.5);
+        if(tmp > max){
+            max = tmp;
+        }
+    }
+
+    // now max shouldn't be zero
+    for(;;){
+        // TODO: and now?
+    }
+    
+    return(max);
+}
+
 int main(int argc, char* argv[])
 {
     int n,i;
@@ -106,24 +132,7 @@ int main(int argc, char* argv[])
         compute_polynomial(x,t,n,a);
         
         // computing max error
-        faktor=1;
-        for(i;i<=n;i++){
-            faktor *= (1 + 2*i);
-        }
-        faktor *= 0.25 * powf(-1,n);
-        faktor /= fak(n);
-        err = 0;
-        for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
-            tmp = faktor * powf(probe,(-(2.0*n-1.0)/2.0));
-            if(tmp > err){
-                err = tmp;
-            }
-        }
-
-        for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
-            // whar goes here????
-        }
-
+        
 
         for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
             result = compute_horner(probe,x,a,n);
@@ -134,6 +143,8 @@ int main(int argc, char* argv[])
             fprintf(fRes,"%.20E %.20E\r\n",probe,result);
         }
         
+         fprintf(stdout,"The Max Error is %.20E ",
+                 compute_max_error(A+(X1/PROBEC),X1,n));
         
 
         fclose(fRes);
