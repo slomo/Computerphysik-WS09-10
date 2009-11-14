@@ -66,16 +66,16 @@ double compute_horner(double probe,double *x,double *a,int n){
     return p;
 }
 
-double compute_max_error(double s,double e,int n){
+double compute_faktor(double s, double e,int n){
     // get faktor (see .pdf for additional info)
-    double faktor,xi,max,tmp = 1;
+    double max=-DBL_MAX,tmp=max,xi;
+    double faktor = 1;
     int i;
     faktor = (-1) * ((n+1)%2); // efficient way for (-1)^n+1
     for(i=1;i<=(n+1);i++){
         faktor *= 1.0-(3.0/(2.0*i));
     }
-
-    max=-DBL_MAX;
+    
     for(xi=s;xi<=e;xi=+(X1/PROBEC)){
         tmp = faktor * pow(xi,(n+1)-0.5);
         if(tmp > max){
@@ -83,21 +83,25 @@ double compute_max_error(double s,double e,int n){
         }
     }
 
-    // now max shouldn't be zero
-    for(;;){
-        // TODO: and now?
+    return faktor;
+}
+
+double compute_max_err(double s,double tilde,double faktor,int n){
+    double xi;
+
+    for(xi=s;xi<tilde;xi=+(X1/PROBEC)){
+        faktor*=xi;
     }
-    
-    return(max);
+    return(faktor);
 }
 
 int main(int argc, char* argv[])
 {
-    int n,i;
-    double probe,result,faktor,err,tmp;
+    int n;
+    double probe,result,faktor;
     double *t,*a,*x;
 
-    FILE *fErr, *fRes;
+    FILE *fErr, *fRes, *fMaxError;
     char* filename;
 
     if(argc==2) {
@@ -127,24 +131,29 @@ int main(int argc, char* argv[])
         strcat(filename,".dat");
         fRes = fopen(filename,"w");
 
+        filename[0] = '\0';
+        strcat(filename,"maxError.");
+        strcat(filename,argv[1]);
+        strcat(filename,".dat");
+        fMaxError = fopen(filename,"w");
+        
         // computing polynomial
         distribute_linear(x,n);
         compute_polynomial(x,t,n,a);
         
-        // computing max error
-        
+        // computing maax error
+        faktor = compute_faktor(A+(X1/PROBEC),X1,n);
 
         for(probe=A+(X1/PROBEC);probe<=X1;probe+=(X1/PROBEC)){
             result = compute_horner(probe,x,a,n);
             fprintf(fRes,"%.20E %.20E\r\n",probe,result);
             fprintf(fErr,"%.20E %.20E\r\n",probe,fabs(result-f(probe)));
+            fprintf(fMaxError,"%.20E %.20E\r\n",probe,
+                    compute_max_err(A+(X1/PROBEC),probe,faktor,n));
         }
         for(;probe<=B;probe+=(X1/PROBEC)){
             fprintf(fRes,"%.20E %.20E\r\n",probe,result);
         }
-        
-         fprintf(stdout,"The Max Error is %.20E ",
-                 compute_max_error(A+(X1/PROBEC),X1,n));
         
 
         fclose(fRes);
