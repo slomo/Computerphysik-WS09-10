@@ -1,18 +1,16 @@
 # aufgabe4_1.dem
 
-!cd data
-
 set yrange[0:1.5]
 set xrange[0:1.5]
 
 set terminal postscript eps enhanced color solid rounded
 set out "aufgabe4-1IP.esp"
 plot sqrt(x) \
-    , "res.15.dat" with line title "p(x)" \
+    , "res.15.dat" with line title "p(x)"
 
 
-set yrange[0:0.3]
-set xrange[0:0.07]
+set yrange[0:0.5]
+set xrange[0:0.2]
 
 set out "aufgabe4-1based5.esp"
 plot sqrt(x) \
@@ -20,20 +18,23 @@ plot sqrt(x) \
     , "err.5.dat" with line title "error" \
     , "maxError.5.dat" with line title "maxError"
 
+set yrange[0:0.35]
+set xrange[0:0.1]
 set out "aufgabe4-1based10.esp"
 plot sqrt(x) \
     , "res.15.dat" with line title "p(x)" \
     , "err.15.dat" with line title "error" \
     , "maxError.5.dat" with line title "maxError"
 
+set yrange[0:0.3]
+set xrange[0:0.066666]
 set out "aufgabe4-1based15.esp"
 plot sqrt(x) \
     , "res.15.dat" with line title "p(x)" \
     , "err.15.dat" with line title "error" \
     , "maxError.15.dat" with line title "maxError"
-pause -1
 
-!epstopdf aufgabe4-1IP.esp && rm aufgabe4-1IP.eps
+!epstopdf aufgabe4-1IP.esp && rm aufgabe4-1IP.esp
 !epstopdf aufgabe4-1based15.esp && rm aufgabe4-1based15.esp
 !epstopdf aufgabe4-1based10.esp && rm aufgabe4-1based10.esp
 !epstopdf aufgabe4-1based5.esp && rm aufgabe4-1based5.esp
