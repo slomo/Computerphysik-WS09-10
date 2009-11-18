@@ -1,66 +1,54 @@
+#include <complex.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <string.h>
 
-#define PI 3.14159265
-#define A -4*Pi 
-#define B 4*Pi
-#define N 4
+#define N 100
 
-double f(double x) {
-    return sin(x/2)+sin(x)*sin(x);
+double f(double x){
+    return(sin(x/2)+(sin(x)*sin(x)));   
 }
 
-void distribute_linear(double *x, int n)
+void distribute_linear(double lower,double upper,double *x, int n)
 {
     int i;
     for(i=0;i<=n;++i){
-        x[i]=A+i*((B-A)/n);
+        x[i]=lower+i*((upper-lower)/n);
     }
 }
 
-double dft(double *h,n,m) {
-    double result;
-    int i;
-    for(i=0;i<N;i++) {
-        result+=h[i]*exp((2*Pi*i*
+int main(int argc,char *argv[]){
+
+    int m,l;
+    double h[N],x[N];
+    double complex hFouier[N];
+    
+    FILE *fhl, *fhm; 
+
+    distribute_linear((-4*M_PI),(4*M_PI),x,N);
+
+    for(l=0;l<N;l++){
+        h[l] = f(x[l]);
     }
-}
 
-int main(int argc, char* argv[])
-{
-    double probes[100],a[4][4],x[4]={-2,-1,1,2},result;
-    int i,j=0;
-    FILE *fallout;
+    fhl = fopen("vektor.data","w");
+    fhm = fopen("fouier.data","w");
 
-    fallout = fopen("aufgabe5_1.out","w");
-
-    distribute_linear(probes,100);
-
-    a[0][0]=f(x[0]);
-    a[0][1]=2;
-    a[0][2]=3;
-    a[0][3]=4;
-    a[1][0]=f(x[1]);
-    a[1][1]=6;
-    a[1][2]=7;
-    a[1][3]=8;
-    a[2][0]=f(x[2]);
-    a[2][1]=10;
-    a[2][2]=11;
-    a[2][3]=12;
-
-    for(i=0;i<100;i++) {
-        if ((probes[i] == -1) || (probes[i] == 1)) {
-            j++;
-            printf("%d\n",j);
+    for(m=1;m<N;m++){
+        hFouier[m]=1;
+        for(l=1;l<N;l++){
+            hFouier[m] += (h[l]*cos(2*l*m*M_PI/N)) + (h[l]*sin(2*l*m*M_PI/N))*I;
+            
         }
-        result=a[j][0]+a[j][1]*(probes[i]-x[j])+a[j][2]*pow((probes[i]-x[j]),2)+a[j][3]*pow((probes[i]-x[j]),3);
-        fprintf(fallout,"%f %f\n",probes[i],result);
+
+        printf("x:%f \thl:%f \tHm:%f + %fi\n",x[m],h[m]
+                ,creal(hFouier[m]),cimag(hFouier[m]));
+        
+        fprintf(fhl,"%f %f\n",x[m],h[m]);
+        //fprintf(fhm,"%f {%f,%f}\n",x[m],creal(hFouier[m]),cimag(hFouier[m]));
+        fprintf(fhm,"%f %f\n",x[m],creal(hFouier[m]));
+
     }
-
-    fclose(fallout);
-
-return EXIT_SUCCESS;
+    
+    return EXIT_SUCCESS;
 }

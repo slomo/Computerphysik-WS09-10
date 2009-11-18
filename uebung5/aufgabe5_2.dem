@@ -1,0 +1,8 @@
+# aufgabe4_1.dem
+
+#set terminal postscript eps enhanced color solid rounded
+#set out "aufgabe4-1IP.esp"
+plot "vektor.data" with line title "hl" \
+    , "fouier.data" with line title "Hm"
+
+pause -1 "Press da shit"
