@@ -1,4 +1,5 @@
 *.aux
 *.log
-a.out
+*.out
+*.data
 *_binary
