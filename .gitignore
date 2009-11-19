@@ -1,3 +1,4 @@
 *.aux
 *.log
 a.out
+*_binary
