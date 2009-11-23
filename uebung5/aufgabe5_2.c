@@ -6,7 +6,7 @@
 #define N 100
 
 double f(double x){
-    return(sin(x/2)+(sin(x)*sin(x)));   
+    return(sin(x/2)+(sin(x)*sin(x)));
 }
 
 void distribute_linear(double lower,double upper,double *x, int n)
@@ -19,7 +19,7 @@ void distribute_linear(double lower,double upper,double *x, int n)
 
 int main(int argc,char *argv[]){
 
-    int m,l,y;
+    int m,l;
     double h[N],x[N];
     double complex hFouier[N],hFouierBack[N];
     
@@ -37,26 +37,31 @@ int main(int argc,char *argv[]){
 
     for(m=1;m<N;m++){
         hFouier[m]=0;
-        hFouierBack[m]=0;
         for(l=1;l<N;l++){
             hFouier[m] += (h[l]*cos(2*l*m*M_PI/N)) + (h[l]*sin(2*l*m*M_PI/N))*I;
             
         }
-        for(y=1;y<m;y++){
-		    hFouierBack[m] += (hFouier[y]*cos(-1*2*y*m*M_PI/N)) + (hFouier[y]*sin(-1*2*y*m*M_PI/N))*I;
-            
-        }
-		hFouierBack[m] = hFouierBack[m]/N;
 		
-        printf("x:%f \thl:%f \tHm:%f + %fi \txm:%f + %fi \n",x[m],h[m]
-                ,creal(hFouier[m]),cimag(hFouier[m])
-                ,creal(hFouierBack[m]),cimag(hFouierBack[m]));
+        printf("x:%f \thl:%f \tHm:%f + %fi\n",x[m],h[m]
+                ,creal(hFouier[m]),cimag(hFouier[m]));
         
         fprintf(fhl,"%f %f\n",x[m],h[m]);
         fprintf(fhm,"%f %f\n",x[m],cabs(hFouier[m]));
+
+
+    }
+    
+    for(m=1;m<N;m++){
+        hFouierBack[m]=0;
+        for(l=1;l<N;l++){
+		    hFouierBack[m] += (hFouier[l]*cos(-1*2*l*m*M_PI/N)) + (hFouier[l]*sin(-1*2*l*m*M_PI/N))*I;
+            
+        }
+		hFouierBack[m] = hFouierBack[m]/N;
         fprintf(fxm,"%f %f\n",x[m],creal(hFouierBack[m]));
 
     }
+    
     fclose(fhl);
     fclose(fhm);
     fclose(fxm);

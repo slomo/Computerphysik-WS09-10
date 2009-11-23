@@ -3,6 +3,7 @@
 #set terminal postscript eps enhanced color solid rounded
 #set out "aufgabe4-1IP.esp"
 plot "vektor.data" with line title "hl" \
-    , "fouier.data" with line title "Hm"
+    , "fouier.data" with line title "Hm" \
+    , "refouier.data" with line title "H"
 
 pause -1 "Press da shit"
