@@ -46,38 +46,35 @@ void fouier_trans(complex double *h,double complex *hFouier,int n){
 
 int main(int argc,char *argv[]){
 
-    int m,n,l,rot;
+    int m,n,l,rot,i;
     float **gh = matrix(1,N,1,N);
     float **evc = matrix(1,N,1,N);
     float *eva = vector(1,N);
     float mns[N];
     float r,phi,x;
     float complex field, sum;
-    FILE *fhl, *fhm; 
-
-    //gh = (float **) malloc(N*N*sizeof(float));
-    //evc = (float **) malloc(N*N*sizeof(float));
+    FILE *file;
+    char* filename = malloc(sizeof(char)*255);
 
     distribute_linear(-N/2,N/2,mns,N);
     
     // start computation of hamiltonien
     for(m=1;m<=N;m++){
         for(n=1;n<=N;n++){
-            field=2/N*powf(M_PI/(N*DELTA_X),2);
+            field=2/(float)N*powf(M_PI/((float)N*DELTA_X),2);
             
             // this could be replaced by a fouiertransformation
-            // so the solution would be more generic and have speeduppossibilitys
+            // so the solution would be more generic and have speedup possibilities
             // due fft
             sum=0;
             for(l=0;l<N;l++){
                 r = l-powf((N/2),2);
                 phi = 2*M_PI*l*(mns[m-1]-mns[n-1])/N;
-                
                 sum += r*cos(phi) + r*sin(phi)*I; 
             }
 
             field *= sum;
-            field += 0.5*powf(mns[n-1],2) * mns[m-1]-mns[n-1];
+            field += 0.5*powf(mns[n-1]*DELTA_X,2) * (n==m ? 1 :0);
 
             //printf("[%d][%d] %f + %fi \n",m,n,creal(field),cimag(field));
 
@@ -89,22 +86,18 @@ int main(int argc,char *argv[]){
     //computation of the eigenvalues/vectors
     jacobi(gh,N,eva,evc,&rot);
     eigsrt(eva,evc,N);
-
+    printf("Eigenvalues computed\n");
     
-    //plot the lowest 5 eigenfunctions to file for [-25,25]
-    //fhl = fopen("eigenfunctions.data","w");
-    //fhm = fopen("fouier.data","w");
-    for(m=N-5;m<=N;m++){
-        /*for(x=-25;x<=25;x+=0.25){
-            fprintf(fhl,"%f %f",x,compute_horner(
-        }*/
+    //plot the lowest 5 eigenfunctions to file
+    for(i=0;i<5;i++){
+        sprintf(filename,"eigenfunction.%d.data",i);
+        file = fopen(filename,"w");
         for(n=1;n<=200;n++){
-            printf("| %F |",evc[m][n]);
+            fprintf(file,"%d %f\n",n,evc[N-i][n]);
         }
-        printf("\n---------------NEXT---------------\n");
+        fclose(file);
     }
-
-   
-
+    printf("Wrote data to file\n");
+    
     return EXIT_SUCCESS;
 }
