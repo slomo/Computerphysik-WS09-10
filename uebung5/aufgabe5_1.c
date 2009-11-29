@@ -29,13 +29,13 @@
 
 double f(double x)
 {
-    return 5.0/(1.0+25.0*x*x);
+    return 5/(1+25*x*x);
 }
 
 void distribute_linear(double *x, int n)
 {
     int i;
-    for(i=0;i<=n;++i){
+    for(i=0;i<n;++i){
         x[i]=A+i*((B-A)/n);
     }
 }
@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
         }
         result=a[j][0]+a[j][1]*(probes[i]-x[j])+a[j][2]*pow((probes[i]-x[j]),2)+a[j][3]*pow((probes[i]-x[j]),3);
         fprintf(fallout,"%f %f\n",probes[i],result);
-        fprintf(fsollout,"%f %f\n",probes[i],f(x[i]));
+        fprintf(fsollout,"%f %f\n",probes[i],f(probes[i]));
     }
 
     fclose(fallout);
