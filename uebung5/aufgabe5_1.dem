@@ -1,0 +1,9 @@
+# aufgabe4_1.dem
+
+set terminal postscript eps enhanced color solid rounded
+set out "aufgabe5_1-plot.eps"
+plot "aufgabe5_1.out" with line title "foo";
+
+
+!epstopdf aufgabe5_1-plot.eps && rm aufgabe5_1-plot.eps
+pause -1 "Press a button"

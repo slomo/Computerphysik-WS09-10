@@ -66,7 +66,7 @@ double compute_horner(double *x,double *a,int n){
 
 int main(int argc, char* argv[])
 {
-    double probes[100],a[4][4],x[4]={-2,-1,1,2},result;
+    double probes[100],a[4][4],x[4]={-2,-1,1,2},result,y[4],h[4];
     int i,j=0;
     FILE *fallout;
 
@@ -80,27 +80,24 @@ int main(int argc, char* argv[])
      * | 0.00 0.00 0.00 2.00 |  |M3|  |0.000000|
      * 
      * Solution M0 = 0, M1 = -0.107101875, M2 = -0.107101875, M3 = 0
-     * values for a still missig because i can't find the papers with
-     * the instructions. Yves please fix or contact me
      */ 
+    double M[4]={0,-0.107101875,-0.107101875,0};
+    
+    for(i=0;i<N;i++) {
+        y[i]=f(x[i]);
+        h[i]=x[i]-x[i-1];
+    }
 
-    a[0][0]=f(x[0]);
-    a[0][1]=2;
-    a[0][2]=3;
-    a[0][3]=4;
-    a[1][0]=f(x[1]);
-    a[1][1]=6;
-    a[1][2]=7;
-    a[1][3]=8;
-    a[2][0]=f(x[2]);
-    a[2][1]=10;
-    a[2][2]=11;
-    a[2][3]=12;
+    for(i=0;i<=2;i++) {
+        a[j][0]=f(x[j]);
+        a[0][1]=(y[j+1]-y[j])/h[j+1] - (2*M[j]+M[j+1])/6 * h[j+1];
+        a[0][2]=M[j]/2;
+        a[0][3]=(M[j+1]-M[j])/(6*h[j+1]);
+    }
 
     for(i=0;i<100;i++) {
         if ((probes[i] == -1) || (probes[i] == 1)) {
             j++;
-            printf("%d\n",j);
         }
         result=a[j][0]+a[j][1]*(probes[i]-x[j])+a[j][2]*pow((probes[i]-x[j]),2)+a[j][3]*pow((probes[i]-x[j]),3);
         fprintf(fallout,"%f %f\n",probes[i],result);
