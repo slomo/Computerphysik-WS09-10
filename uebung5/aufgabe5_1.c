@@ -29,7 +29,7 @@
 
 double f(double x)
 {
-    return 5/(1+25*x*x);
+    return 5.0/(1.0+25.0*x*x);
 }
 
 void distribute_linear(double *x, int n)
@@ -68,9 +68,10 @@ int main(int argc, char* argv[])
 {
     double probes[100],a[4][4],x[4]={-2,-1,1,2},result,y[4],h[4];
     int i,j=0;
-    FILE *fallout;
+    FILE *fallout,*fsollout;
 
     fallout = fopen("aufgabe5_1.out","w");
+    fsollout = fopen("aufgabe5_1_soll.out","w");
 
     distribute_linear(probes,100);
 
@@ -101,9 +102,11 @@ int main(int argc, char* argv[])
         }
         result=a[j][0]+a[j][1]*(probes[i]-x[j])+a[j][2]*pow((probes[i]-x[j]),2)+a[j][3]*pow((probes[i]-x[j]),3);
         fprintf(fallout,"%f %f\n",probes[i],result);
+        fprintf(fsollout,"%f %f\n",probes[i],f(x[i]));
     }
 
     fclose(fallout);
+    fclose(fsollout);
 
 return EXIT_SUCCESS;
 }
