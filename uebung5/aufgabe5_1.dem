@@ -4,7 +4,7 @@ set terminal postscript eps enhanced color solid rounded
 set out "aufgabe5_1-plot.eps"
 
 plot "aufgabe5_1.out" with line title "approx" \
-    , "aufgabe5_1_soll.out" with line title "fuuu";
-
+    , "aufgabe5_1_soll.out" with line title "fun" \
+    , "aufgabe5_1_err.out" with line title "err";
 !epstopdf aufgabe5_1-plot.eps && rm aufgabe5_1-plot.eps
 pause -1 "Press a button"
