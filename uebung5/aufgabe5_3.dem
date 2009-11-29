@@ -1,13 +1,14 @@
 # aufgabe4_1.dem
 
 set terminal postscript eps enhanced color solid rounded
-set out "aufgabe3-plot.esp"
-plot "eigenfunction.0.data" with line title "lowest eigenvalue"\
-   , "eigenfunction.1.data" with line title "2nd lowest eigenvalue"\
-   , "eigenfunction.2.data" with line title "3rd lowest eigenvalue"\
-   , "eigenfunction.3.data" with line title "3th lowest eigenvalue"\
-   , "eigenfunction.4.data" with line title "5th lowest eigenvalue";
+set out "aufgabe3-plot.eps"
+plot "eigenfunction.0.data" with line title "lowest eigenvalue" \
+   , "eigenfunction.1.data" with line title "2nd lowest eigenvalue" \
+   , "eigenfunction.2.data" with line title "3rd lowest eigenvalue" \
+   , "eigenfunction.3.data" with line title "3th lowest eigenvalue" \
+   , "eigenfunction.4.data" with line title "5th lowest eigenvalue" \
+   , "potential.data" with line title "potential v";
 
 
-!epstopdf aufgabe3-plot.esp && rm aufgabe3-plot.eps
+!epstopdf aufgabe3-plot.eps && rm aaufgabe3-plot.eps
 pause -1 "Press a button"

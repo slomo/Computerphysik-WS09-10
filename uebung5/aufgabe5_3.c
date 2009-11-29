@@ -6,7 +6,7 @@
 
 #define N 200
 #define DELTA_X 0.25
-#define POTENTIAL_FAK 1 
+#define POTENTIAL_FAK 0.01*0.01
 
 void distribute_linear(float lower,float upper,float *x, int n){
     int i;
@@ -46,7 +46,7 @@ int main(int argc,char *argv[]){
     FILE *file;
     char* filename = malloc(sizeof(char)*255);
 
-    distribute_linear(-N/2,N/2,mns,N);
+    distribute_linear(-N/2.0,N/2.0,mns,N);
     
     // start computation of hamiltonien
     for(m=0;m<N;m++){
@@ -87,10 +87,17 @@ int main(int argc,char *argv[]){
             if(n%2==1){
                 evc[n][N-i] *= -1;
             }
-            fprintf(file,"%d %f\n",n,evc[n][N-i]);
+            fprintf(file,"%f %f\n",mns[n-1]*DELTA_X,evc[n][N-i]);
         }
         fclose(file);
     }
+    
+    file = fopen("potential.data","w");
+    for(n=0;n<200 ;n++){
+        fprintf(file,"%f %f\n",mns[n]*DELTA_X,
+                0.5*POTENTIAL_FAK*powf(mns[n]*DELTA_X,2));
+    }
+    fclose(file);
     printf("Wrote data to file\n");
     
     return EXIT_SUCCESS;
