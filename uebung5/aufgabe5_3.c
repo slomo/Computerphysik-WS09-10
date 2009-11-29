@@ -6,7 +6,7 @@
 
 #define N 200
 #define DELTA_X 0.25
-
+#define POTENTIAL_FAK 1 
 
 void distribute_linear(float lower,float upper,float *x, int n){
     int i;
@@ -15,16 +15,6 @@ void distribute_linear(float lower,float upper,float *x, int n){
     }
 }
 
-/*double solve(float *a,float x,int n){
-    double p=a[n];
-    int i;
-
-    for(i=n-1;i>=0;--i) {
-        p=p*(X-x[i])+a[i];
-    }
-    return p;
-}
-*/
 /*
 double complex h(double l, double n){
     double r    = pow((l - (N/2)),2); 
@@ -74,7 +64,7 @@ int main(int argc,char *argv[]){
             }
 
             field *= sum;
-            field += 0.5*powf(mns[n]*DELTA_X,2) * (n==m ? 1 :0);
+            field += 0.5*POTENTIAL_FAK*powf(mns[n]*DELTA_X,2) * (n==m ? 1 :0);
 
             //printf("[%d][%d] %f + %fi \n",m,n,creal(field),cimag(field));
 
