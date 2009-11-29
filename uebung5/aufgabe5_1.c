@@ -74,6 +74,16 @@ int main(int argc, char* argv[])
 
     distribute_linear(probes,100);
 
+    /* | 2.00 0.00 0.00 0.00 |  |M0|  |0.000000|
+     * | 0.33 2.00 0.67 0.00 |  |M1|  |-0.285605|
+     * | 0.00 0.67 2.00 0.33 |  |M2|  |-0.285605|
+     * | 0.00 0.00 0.00 2.00 |  |M3|  |0.000000|
+     * 
+     * Solution M0 = 0, M1 = -0.107101875, M2 = -0.107101875, M3 = 0
+     * values for a still missig because i can't find the papers with
+     * the instructions. Yves please fix or contact me
+     */ 
+
     a[0][0]=f(x[0]);
     a[0][1]=2;
     a[0][2]=3;
