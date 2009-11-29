@@ -59,26 +59,26 @@ int main(int argc,char *argv[]){
     distribute_linear(-N/2,N/2,mns,N);
     
     // start computation of hamiltonien
-    for(m=1;m<=N;m++){
-        for(n=1;n<=N;n++){
-            field=2/(float)N*powf(M_PI/((float)N*DELTA_X),2);
+    for(m=0;m<N;m++){
+        for(n=0;n<N;n++){
+            field=2.0/(float)N*powf(M_PI/((float)N*DELTA_X),2);
             
             // this could be replaced by a fouiertransformation
             // so the solution would be more generic and have speedup possibilities
             // due fft
             sum=0;
             for(l=0;l<N;l++){
-                r = l-powf((N/2),2);
-                phi = 2*M_PI*l*(mns[m-1]-mns[n-1])/N;
+                r = powf((l-(N/2)),2);
+                phi = 2*M_PI*l*(mns[m]-mns[n])/N;
                 sum += r*cos(phi) + r*sin(phi)*I; 
             }
 
             field *= sum;
-            field += 0.5*powf(mns[n-1]*DELTA_X,2) * (n==m ? 1 :0);
+            field += 0.5*powf(mns[n]*DELTA_X,2) * (n==m ? 1 :0);
 
             //printf("[%d][%d] %f + %fi \n",m,n,creal(field),cimag(field));
 
-            gh[m][n] = creal(field); 
+            gh[m+1][n+1] = creal(field); 
         }
     }
     printf("Hamiltonien computed\n");
@@ -92,8 +92,12 @@ int main(int argc,char *argv[]){
     for(i=0;i<5;i++){
         sprintf(filename,"eigenfunction.%d.data",i);
         file = fopen(filename,"w");
+        printf("Eigenvalue No. %d: %f\n",i,eva[N-i]);
         for(n=1;n<=200;n++){
-            fprintf(file,"%d %f\n",n,evc[N-i][n]);
+            if(n%2==1){
+                evc[n][N-i] *= -1;
+            }
+            fprintf(file,"%d %f\n",n,evc[n][N-i]);
         }
         fclose(file);
     }

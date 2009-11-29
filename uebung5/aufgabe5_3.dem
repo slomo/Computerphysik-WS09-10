@@ -2,10 +2,10 @@
 
 #set terminal postscript eps enhanced color solid rounded
 #set out "aufgabe4-1IP.esp"
-plot "eigenfunction.0.data" with line title "0" \
-   , "eigenfunction.1.data" with line title "1" \
-   , "eigenfunction.2.data" with line title "2" \
-   , "eigenfunction.3.data" with line title "3" \
-   , "eigenfunction.4.data" with line title "4";
+plot "eigenfunction.0.data" with line title "lowest eigenvalue"\
+   , "eigenfunction.1.data" with line title "2nd lowest eigenvalue"\
+   , "eigenfunction.2.data" with line title "3rd lowest eigenvalue"\
+   , "eigenfunction.3.data" with line title "3th lowest eigenvalue"\
+   , "eigenfunction.4.data" with line title "5th lowest eigenvalue";
 
 pause -1 "Press a button"
