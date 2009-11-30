@@ -1,7 +1,7 @@
-# aufgabe4_1.dem
+# aufgabe5_2.dem
 
-#set terminal postscript eps enhanced color solid rounded
-#set out "aufgabe4-1IP.esp"
+set terminal postscript eps enhanced color solid rounded
+set out "aufgabe5_2.eps"
 plot "vektor.data" with line title "hl" \
     , "fouier.data" with line title "Hm" \
     , "refouier.data" with line title "H";
