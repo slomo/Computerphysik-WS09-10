@@ -20,6 +20,11 @@ void distribute_linear(double *x, int n)
     }
 }
 
+/*
+ * Our solutions seems to lack of resolution. So the aproximation
+ * is quite bad in the center.
+ */
+
 int main(int argc, char* argv[])
 {
     double probes[100],a[4][4],x[4]={-2,-1,1,2},result,y[4],h[4];
