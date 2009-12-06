@@ -45,7 +45,7 @@ double phi(int n, double x) {
 }
 
 double phi_2(int n, double x) {
-    return powf(2,phi(n,x));
+    return powf(phi(n,x),2);
 }
 
 void distribute_linear(double lower,double upper,double *x, int n) {
@@ -120,9 +120,8 @@ int main(int argc,char *argv[]) {
         steps=16;
         while(fabs(oldresult-result) > PRES) {
             oldresult=result;
-            result=intergrate_homer(-a,a,steps,phi,j);
+            result=intergrate_homer(-a,a,steps,phi_2,j);
             steps *= 2;
-            printf("%d\n",steps);
         }
         printf("Result for n=%d: %f\n",j,result);
         
