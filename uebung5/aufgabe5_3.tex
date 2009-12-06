@@ -12,6 +12,16 @@
 \maketitle
 
 \paragraph{Comparison to analyical solution}
+Actually we were not able to put the analytical solution together, due to a
+leck understanding in quantum physics. So we are not able to make an 
+quntitative comaprison. But a qulatativ compersion to a paper 
+(http://www.jkrieger.de/download/quantenmechanik.pdf/ p. 67) shows that our
+results are pretty close to the analytic solution. We assume that a better 
+result could be reach by choosing smaller $\Delta x$ for the discretisation.
+
+
+\paragraph{}
+
 
 \begin{figure}
 \centering
@@ -24,16 +34,17 @@ When computing the hamiltonien with smaller potentials, we meet several new
 problems. First of all our solutions have much smaller absolute values, but
 our machine accuraccy keeps still the same, wich leavs might lead to bigger
 relative Error. On the other hand we have to increase the our N or increase 
-our $\delta x$, in order to be able to plot all eigenfunctions completle,
+our $\Delta x$, in order to be able to plot all eigenfunctions completle,
 wich results in more operations (where $O(n)=n^3$), or lesser accuracy. If 
 the potential is choosen very low the longitude of the ozzilator is growing
 fast.
-
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{aufgabe3-lowpot.pdf}
 \caption{\em \small plot with lower harmonic potential}
 \end{figure}
+
+
 
 \end{document}
