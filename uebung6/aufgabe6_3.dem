@@ -3,7 +3,19 @@
 #set terminal postscript eps enhanced color solid rounded
 #set out "aufgabe6_3-plot.eps"
 
-#set arrow 1 from 3,-0.8 to 3,0.8 nohead
+set arrow 1 from 1,0.8 to 1,-0.8 nohead
+set arrow 2 from 1.732051,0.8 to 1.732051,-0.8 nohead
+set arrow 3 from 2.236068,0.8 to 2.236068,-0.8 nohead
+set arrow 4 from 2.645751,0.8 to 2.645751,-0.8 nohead
+set arrow 5 from 3,0.8 to 3,-0.8 nohead
+set arrow 6 from 3.316625,0.8 to 3.316625,-0.8 nohead
+
+set arrow 7 from -1,0.8 to -1,-0.8 nohead
+set arrow 8 from -1.732051,0.8 to -1.732051,-0.8 nohead
+set arrow 9 from -2.236068,0.8 to -2.236068,-0.8 nohead
+set arrow 10 from -2.645751,0.8 to -2.645751,-0.8 nohead
+set arrow 11 from -3,0.8 to -3,-0.8 nohead
+set arrow 12 from -3.316625,0.8 to -3.316625,-0.8 nohead
 
 plot "phi_n0.data" with line title "phi n_0" \
    , "phi_n1.data" with line title "phi n_1" \
