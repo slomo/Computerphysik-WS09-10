@@ -55,21 +55,6 @@ void distribute_linear(double lower,double upper,double *x, int n) {
     }
 }
 
-// Constraint: a < b
-double intergrate_trapezoidal(double a,double b,int n,double (*f)(int,double),int j){
-    double i;
-    double h = (b-a)/(double)n;
-    double sum = 0;
-
-    // could be done more iffecient in array with int i, but needs more mem
-    sum += 0.5 * (f(j,a) + f(j,b));
-    for(i=a+h;i<b;i+=h){
-        sum += f(j,i); 
-    }
-
-    return(sum*h);
-}
-
 // Constrain a < b
 double intergrate_homer(double a,double b,int n,double (*f)(int,double), int j){
     double i;
@@ -123,7 +108,7 @@ int main(int argc,char *argv[]) {
             result=intergrate_homer(-a,a,steps,phi_2,j);
             steps *= 2;
         }
-        printf("Result for n=%d: %f\n",j,result);
+        printf("Result for n=%d: %f => chance to be out of bounds: %f\n",j,result,1-result);
         
     }
     
