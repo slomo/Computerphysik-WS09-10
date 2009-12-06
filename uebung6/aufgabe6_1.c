@@ -51,6 +51,7 @@ double intergrate_homer(double a,double b,int n,double (*f)(double)){
         else{
             sum += 2.0*f(i);
         }
+        even = !even;
     }
 
     return(sum*(h/3.0));
