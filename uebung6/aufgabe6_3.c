@@ -123,7 +123,7 @@ int main(int argc,char *argv[]) {
             result=intergrate_homer(-a,a,steps,phi_2,j);
             steps *= 2;
         }
-        printf("Result for n=%d: %f\n",j,result);
+        printf("Result for n=%d: %f => chance to be out of bounds: %f\n",j,result,1-result);
         
     }
     
