@@ -80,4 +80,6 @@ int main(int argc,char *argv[]){
         printf("\tWith simpson rule and %d intervals: %f \n",i,
             intergrate_homer(0,1,i,g)*4);
     }
+
+    return EXIT_SUCCESS;
 }
