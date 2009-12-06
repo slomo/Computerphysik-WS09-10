@@ -115,8 +115,8 @@ int main(int argc,char *argv[]) {
         fclose(fphi);
         
         a=sqrt(2*j+1);
-        result=intergrate_homer(-a,a,4,phi,j);
-        oldresult=intergrate_homer(-a,a,8,phi,j);
+        result=intergrate_homer(-a,a,4,phi_2,j);
+        oldresult=intergrate_homer(-a,a,8,phi_2,j);
         steps=16;
         while(fabs(oldresult-result) > PRES) {
             oldresult=result;
