@@ -1,0 +1,8 @@
+set terminal postscript eps enhanced color solid rounded
+set out "aufgabe7_2.eps"
+
+plot "aufgabe7_2.err" with line title "erorr" \
+   , "aufgabe7_2.num" with line title "numeric values" \
+   , "aufgabe7_2.exa" with line title "exakt values" ;
+
+!epstopdf aufgabe7_2.eps && rm aufgabe7_2.eps
