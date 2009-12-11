@@ -59,27 +59,32 @@ double intergrate_homer(double a,double b,int n,double (*f)(double)){
 
 int main(int argc,char *argv[]){
     int i;
+    double result;
     printf("For the 1st function:\n");
     for(i=10;i<=1000;i*=10){
-        printf("\tWith trapezoidal rule and %d intervals: %f \n",i,
-            intergrate_trapezoidal(0,1,i,f)*4);
+        result = intergrate_trapezoidal(0,1,i,f)*4;
+        printf("\tWith trapezoidal rule and %d intervals: %f\terror: %f%%\n",i,
+            result,(result/M_PI-1)*100);
     }
 
     for(i=10;i<=1000;i*=10){
-        printf("\tWith simpson rule and %d intervals: %f \n",i,
-            intergrate_homer(0,1,i,f)*4);
+        result = intergrate_homer(0,1,i,f)*4;
+        printf("\tWith simpson rule and %d intervals: %f\t\terror: %f%%\n",i,
+            result,(result/M_PI-1)*100);
     }
 
     
     printf("For the 2nd function:\n");
     for(i=10;i<=1000;i*=10){
-        printf("\tWith trapezoidal rule and %d intervals: %f \n",i,
-            intergrate_trapezoidal(0,1,i,g)*4);
+        result = intergrate_trapezoidal(0,1,i,f)*4;
+        printf("\tWith trapezoidal rule and %d intervals: %f\terror: %f%%\n",i,
+             result,(result/M_PI-1)*100);
     }
 
     for(i=10;i<=1000;i*=10){
-        printf("\tWith simpson rule and %d intervals: %f \n",i,
-            intergrate_homer(0,1,i,g)*4);
+        result = intergrate_homer(0,1,i,g)*4;
+        printf("\tWith simpson rule and %d intervals: %f\t\terror: %f%%\n",i,
+             result,(result/M_PI-1)*100);
     }
 
     return EXIT_SUCCESS;
