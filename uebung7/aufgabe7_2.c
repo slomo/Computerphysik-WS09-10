@@ -13,14 +13,14 @@ int main (int argc,char *argv[]){
     FILE *fErr,*fNum,*fExa;
 
     //taken from given website
-    double x[10] = {   
+    double x[5] = {   
             0.148875338981163
         ,   0.433395394129247
         ,   0.679409568299024
         ,   0.865063366688985
         ,   0.981560643246719
         };
-    double w[10] = {   
+    double w[5] = {   
             0.295524224714753
         ,   0.269266719309996
         ,   0.219086362515982
@@ -35,7 +35,7 @@ int main (int argc,char *argv[]){
     printf("m\tnumeric\t\texakt\t\trelErr\r\n");
     for(m=0;m<=22;m+=2){
         nArea=0;
-        for(i=1;i<=5;i++){
+        for(i=0;i<5;i++){
             nArea+=p(x[i],m)*w[i];
         }
         
