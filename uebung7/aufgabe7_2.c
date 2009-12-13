@@ -6,6 +6,10 @@ double p(double x,double m){
     return(pow(x,m));
 }
 
+double e(double t) {
+    return exp(-(t*t));
+}
+
 int main (int argc,char *argv[]){
     int i,m;
     double eArea,nArea,relErr;
@@ -32,7 +36,7 @@ int main (int argc,char *argv[]){
     fNum = fopen("aufgabe7_2.num","w");
     fExa = fopen("aufgabe7_2.exa","w");
 
-    printf("m\tnumeric\t\texakt\t\trelErr\r\n");
+    printf("m\tnumeric\t\texakt\t\tlog(relErr)\r\n");
     for(m=0;m<=22;m+=2){
         nArea=0;
         for(i=0;i<5;i++){
@@ -51,5 +55,35 @@ int main (int argc,char *argv[]){
     fclose(fErr);
     fclose(fNum);
     fclose(fExa);
+    
+    //first part finished
+    //second part ahead
+    
+    fErr = fopen("aufgabe7_2_2.err","w");
+    fNum = fopen("aufgabe7_2_2.num","w");
+    fExa = fopen("aufgabe7_2_2.exa","w");
+    
+    printf("\n\nj\tnumeric\t\texakt\t\tlog(relErr)\r\n");
+    for(m=1;m<=500;m++){
+        nArea=0;
+        //TODO: review this part
+        for(i=0;i<5;i++){
+            nArea+=e(x[i])*w[i];
+        }
+        nArea *= 2/sqrt(M_PI);
+                 
+        eArea=erf(m*0.01);
+        relErr=(nArea/eArea-1)*100;
+        
+        printf("%d\t%f\t%f\t%f\r\n",m,nArea,eArea,log(fabs(relErr)));
+
+        fprintf(fNum,"%d %f\n",m,nArea);
+        fprintf(fExa,"%d %f\n",m,eArea);
+        fprintf(fErr,"%d %f\n",m,log(fabs(relErr)));
+    }
+    fclose(fErr);
+    fclose(fNum);
+    fclose(fExa);
+
     return EXIT_SUCCESS;
 }
