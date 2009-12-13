@@ -66,7 +66,6 @@ int main (int argc,char *argv[]){
     printf("\n\nj\tnumeric\t\texakt\t\tlog(relErr)\r\n");
     for(m=1;m<=500;m++){
         nArea=0;
-        //TODO: review this part
         for(i=0;i<5;i++){
             nArea+=e(x[i])*w[i];
         }
