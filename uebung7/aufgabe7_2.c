@@ -44,8 +44,12 @@ int main (int argc,char *argv[]){
         
         printf("%d\t%f\t%f\t%f\r\n",m,nArea,eArea,log(fabs(relErr)));
 
-        fprintf(fNum,"%d %f",m,nArea);
-        fprintf(fExa,"%d %f",m,eArea);
-        fprintf(fErr,"%d %f",m,relErr);
+        fprintf(fNum,"%d %f\n",m,nArea);
+        fprintf(fExa,"%d %f\n",m,eArea);
+        fprintf(fErr,"%d %f\n",m,log(fabs(relErr)));
     }
+    fclose(fErr);
+    fclose(fNum);
+    fclose(fExa);
+    return EXIT_SUCCESS;
 }
