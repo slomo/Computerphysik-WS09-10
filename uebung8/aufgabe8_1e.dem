@@ -1,0 +1,28 @@
+set terminal postscript eps enhanced color solid rounded
+
+set out "aufgabe8_1e_0_y1.eps"
+plot "0_y1.out" with boxes title "mu=0 / roh=0.1 / y1";
+
+set out "aufgabe8_1e_0_y2.eps"
+plot "0_y2.out" with boxes title "mu=0 / roh=0.1 / y2";
+
+set out "aufgabe8_1e_1_y1.eps"
+plot "1_y1.out" with boxes title "mu=10 / roh=0.1 / y1";
+
+set out "aufgabe8_1e_1_y2.eps"
+plot "1_y2.out" with boxes title "mu=10 / roh=0.1 / y2";
+
+set out "aufgabe8_1e_2_y1.eps"
+plot "2_y1.out" with boxes title "mu=0 / roh=1 / y1";
+
+set out "aufgabe8_1e_2_y2.eps"
+plot "2_y2.out" with boxes title "mu=0 / roh=1 / y2";
+
+set out "aufgabe8_1e_3_y1.eps"
+plot "3_y1.out" with boxes title "mu=10 / roh=1 / y1";
+
+set out "aufgabe8_1e_3_y2.eps"
+plot "3_y2.out" with boxes title "mu=10 / roh=1 / y2";
+
+!ls -1 *.eps | xargs -n1 epstopdf
+!rm *.eps
