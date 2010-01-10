@@ -3,6 +3,11 @@
 #include <time.h>
 #include "rng.h"
 
+double f(double x) {
+    //TODO: implement function
+    return x;
+}
+
 void bubbleSort(double numbers[], int array_size)
 {
   int i, j, temp;
@@ -28,21 +33,21 @@ void bubbleSort(double numbers[], int array_size)
 double casino_royal(double(*f)(double), double(*rng)(long*), int n, double a, double b) {
     int i;
     double *random_numbers,oldValue,currentValue,result;
-    double seed;
+    long seed;
     
     seed = (long)time(NULL);
     
     random_numbers = malloc(sizeof(double)*n);
     
     // Generate n random Numbers in the given interval
-    for(i=0;i<N;i++) {
+    for(i=0;i<n;i++) {
         random_numbers[i] = a+(rng(&seed)*(b-a));
     }
     bubbleSort(random_numbers,n);
     
     oldValue = f(random_numbers[0]);
     
-    for(i=1;i<N;i++) {
+    for(i=1;i<n;i++) {
         currentValue = f(random_numbers[i]);
         result += (currentValue+oldValue)/2.0 * fabs(currentValue-oldValue);
         oldValue = currentValue;
@@ -52,6 +57,7 @@ double casino_royal(double(*f)(double), double(*rng)(long*), int n, double a, do
 
 int main(int argc, char** argv)
 {
-    
+    //TODO: make output nice
+    printf("Result: %f\n", casino_royal(f, ran, 100, 1, 5));
     return EXIT_SUCCESS;
 }
