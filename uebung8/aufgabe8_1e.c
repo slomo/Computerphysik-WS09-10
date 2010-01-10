@@ -30,9 +30,6 @@ void do_stats(double mu, double roh, double *in, long *out, long n, long sampele
 				if(index<sampeles) {
 					out[index]++;
 				}
-				else {
-					printf("D'Fuck\n");
-				}
 			} 
 			index++;
 		}
@@ -79,14 +76,30 @@ int main(int argc, char** argv)
     for(i=0;i<4;i++) {
         avg1[i] = 0;
         avg2[i] = 0;
+        var1[i] = 0;
+        var2[i] = 0;
         for(j=0;j<n;j++) {
             avg1[i] += y1[i][j];
             avg2[i] += y2[i][j];
+            switch (i) {
+				case 0:
+				case 2:
+					var1[i] += pow(y1[i][j],2);
+					var2[i] += pow(y2[i][j],2);
+					break;
+				case 1:
+				case 3:
+					var1[i] += pow(y1[i][j]-10,2);
+					var2[i] += pow(y2[i][j]-10,2);
+					break;
+			}
         }
         avg1[i] /= n;
         avg2[i] /= n;
-        printf("\ny1 %ld avarage: %f\n",i,avg1[i]);
-        printf("y2 %ld avarage: %f\n",i,avg2[i]);        
+        var1[i] *= 1.0/(n-1.0);
+        var2[i] *= 1.0/(n-1.0);
+        printf("\ny1 %ld avarage: %f / var: %f\n",i,avg1[i],var1[i]);
+        printf("y2 %ld avarage: %f / var: %f\n",i,avg2[i],var2[i]);        
     }
     
     for(j=0;j<4;j++){
