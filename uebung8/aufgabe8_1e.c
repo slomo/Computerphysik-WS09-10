@@ -11,16 +11,45 @@ void box_muller(double mu, double roh, double *x1, double *x2, double *y1, doubl
     }
 }
 
+void zero_stats(long *in, long n) {
+	int i;
+	for(i=0;i<n;i++) {
+		in[i]=0;
+	}
+}
+
+void do_stats(double mu, double roh, double *in, long *out, long n, long sampeles) {
+    double range,sample,j;
+    int i,index;
+    range = 2.0*5.0*roh;
+    sample = range/sampeles;
+    for(i=0;i<n;i++) {
+		index=0;
+        for(j=mu-5*roh;j<=mu+5*roh;j+=sample) {
+            if((in[i] >= j) && (in[i] < j+sample)) {
+				if(index<sampeles) {
+					out[index]++;
+				}
+				else {
+					printf("D'Fuck\n");
+				}
+			} 
+			index++;
+		}
+    }
+}
+
 int main(int argc, char** argv)
 {
-    double *x1, *x2, *y1[4], *y2[4],avg1[4],avg2[4],var1[4],var2[4];
-    long seed,n,i,j;
+    double *x1, *x2, *y1[4], *y2[4],avg1[4],avg2[4],var1[4],var2[4],x,mu,roh;
+    long seed,n,i,j,*stats;
     char str[255];
     seed = (long)time(NULL);
-    FILE *output1,*output2;
+    FILE *output;
     
     n=(long)pow(10,6);
     
+    stats = malloc(sizeof(long)*100);
     x1 = malloc(sizeof(double)*n);
     x2 = malloc(sizeof(double)*n);
     y1[0] = malloc(sizeof(double)*n);
@@ -48,25 +77,61 @@ int main(int argc, char** argv)
     
     // Avarage generation and output
     for(i=0;i<4;i++) {
-        sprintf(str,"%ld_y1.out",i);
-        output1=fopen(str,"w");
-        sprintf(str,"%ld_y2.out",i);
-        output2=fopen(str,"w");
         avg1[i] = 0;
         avg2[i] = 0;
         for(j=0;j<n;j++) {
-            fprintf(output1,"%f\n",y1[i][j]);
-            fprintf(output2,"%f\n",y2[i][j]);
             avg1[i] += y1[i][j];
             avg2[i] += y2[i][j];
         }
         avg1[i] /= n;
         avg2[i] /= n;
         printf("\ny1 %ld avarage: %f\n",i,avg1[i]);
-        printf("y2 %ld avarage: %f\n",i,avg2[i]);
-        free(output1);
-        free(output2);
+        printf("y2 %ld avarage: %f\n",i,avg2[i]);        
     }
+    
+    for(j=0;j<4;j++){
+		switch(j) {
+			case 0:
+				mu=0;
+				roh=0.1;
+				break;
+			case 1:
+				mu=10;
+				roh=0.1;
+				break;
+			case 2:
+				mu=0;
+				roh=1;
+				break;
+			case 3:
+				mu=10;
+				roh=1;
+				break;
+		}
+		
+		sprintf(str,"%ld_y1.out",j);
+		output=fopen(str,"w");
+		zero_stats(stats,100);
+		do_stats(mu,roh,y1[j],stats,n,100);
+		x=mu-5*roh;
+		for(i=0;i<100;i++) {
+			fprintf(output,"%f %ld\n",x,stats[i]);
+			x+=(2.0*5.0*roh)/100.0;
+		}
+		fclose(output);
+		
+		sprintf(str,"%ld_y2.out",j);
+		output=fopen(str,"w");
+		zero_stats(stats,100);
+		do_stats(mu,roh,y2[j],stats,n,100);
+		x=mu-5*roh;
+		for(i=0;i<100;i++) {
+			fprintf(output,"%f %ld\n",x,stats[i]);
+			x+=(2.0*5.0*roh)/100.0;
+		}
+		fclose(output);
+	}
 
+    
     return EXIT_SUCCESS;
 }
