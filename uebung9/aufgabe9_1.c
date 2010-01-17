@@ -21,13 +21,12 @@ double abs_phi10_pow2_d(double x) {
     return -2*x*pow(M_E,-pow(x,2))*(pow(x,10)-45*pow(x,8)+630*pow(x,6)-3150*pow(x,4)+4725*pow(x,2)-945)*(pow(x,10)-55*pow(x,8)+990*pow(x,6)-6930*pow(x,4)+17325*pow(x,2)-10395);
 }
 
-// function gets a range from a to b, a function, the derivative of the function and a accuracy
+// function gets a range from a to b, a function, the derivative of the function, a accuracy and a startvalue
 // it retruns the root of the function in the interval
-double newton_raphson(double a,double b, double(*f)(double), double(*df)(double), double acc) {
+double newton_raphson(double a,double b, double(*f)(double), double(*df)(double), double acc, double start) {
     double value,dx,fx,d;
 
-    // 1st guess center of interval
-    value = 0.5*(a+b);
+    value = start;
     fx=f(value);
     dx=df(value);
 
