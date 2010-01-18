@@ -14,8 +14,10 @@ double f(double x) {
 
 // first derivativ of the function (calcultated manully)
 double fd(double x) {
-    return(10*powl(x,9)-360*powl(x,7)+3780*powl(x,5)-12600*powl(x,3)+9450*x);   
+    //return(10*powl(x,9)-360*powl(x,7)+3780*powl(x,5)-12600*powl(x,3)+9450*x);   
     //return(3*x*x);
+   double dx = ACCU*2;
+   return((f(x+dx)-f(x))/dx);
 }
 
 // this function does the computation need for the newton algorithm
