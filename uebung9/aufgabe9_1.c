@@ -77,5 +77,6 @@ int main(int argc, char** argv)
         seeds[i]=wheel(f,fd,seeds[i]);
         printf("root %d -> f(%lf)=%lf \r\n",i,seeds[i],f(seeds[i]));
     }
-    
+
+    return EXIT_SUCCESS;
 }
