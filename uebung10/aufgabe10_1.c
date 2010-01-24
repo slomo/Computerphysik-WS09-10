@@ -196,7 +196,7 @@ int main(int argc, char** argv)
     for(i=0;i<4;i++){
         double res=0;
         for(j=0;j<4;j++){
-            res += test[i][j]*sol[i];
+            res += test[i][j]*sol[j];
         }
         printf("| %lf |\r\n",res);
     }
