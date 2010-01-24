@@ -5,6 +5,21 @@
 
 #define ACCU powl(10,-1)
 
+/*
+ * remarks:
+ *
+ * 10 ^  -1
+ * 10 ^  -3
+ * 10 ^  -6
+ * 10 ^ -12
+ *
+ * Arccoording to the lecature there are 3 criteria, to tell wether the algorithm
+ * is converge or not. It was also sad they can be simplified to: If the numbers 
+ * on the diagonal of the matrix are more dominant, then the rest, the Algorithm 
+ * converges. As it is the case with the given values.
+ */
+
+
 
 /*
  * Compute the euklidic norm of the given vector
@@ -15,7 +30,6 @@ double euklid(double vector[], int dim){
     for(i=0;i<dim;i++){
         sum+= vector[i]*vector[i];
     }
-    printf("%lf",sum);
     return(sqrt(sum));
 }
 
@@ -92,8 +106,6 @@ int main(int argc, char** argv)
         xNow = xPast;
         xPast = xChange;
 
-        printf(".");
-    }
 
     printf("\r\nResult\r\n");
 
