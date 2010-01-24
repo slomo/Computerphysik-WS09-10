@@ -185,8 +185,12 @@ int main(int argc, char** argv)
 
 #ifdef TEST
     // testing the solution
-    
-
+/* This should be the correct solution
+    sol[0]=-1.259937697;
+    sol[1]=-0.7148628406;
+    sol[2]=-1.558092707;
+    sol[3]=-0.7109956762;
+*/
     printf("\r\nTest:\r\n");
 
     for(i=0;i<4;i++){
