@@ -45,7 +45,7 @@ void iterate(double matrix[][4],double vector[],double last[],double next[],int 
         sum=0;
         for(j=0;j<dim;j++){
             if(j!=i){
-                sum += matrix[i][j] + last[j];
+                sum += matrix[i][j] * last[j];
             }
         }
         next[i] = (vector[i]-sum) / matrix[i][i];
@@ -105,8 +105,7 @@ int main(int argc, char** argv)
         xChange = xNow;
         xNow = xPast;
         xPast = xChange;
-
-
+    }
     printf("\r\nResult\r\n");
 
     for(i=0;i<4;i++){
