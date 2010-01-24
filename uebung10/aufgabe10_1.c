@@ -4,6 +4,19 @@
 #include <math.h>
 
 #define TEST
+
+void printSquareMatrixandVector(double matrix[][4], double vector[], int count) {
+    int i,j;
+    for(i=0;i<count;i++){
+        printf("|");
+        for(j=0;j<count;j++){
+            printf(" %lf ",matrix[i][j]);
+        }
+        printf("|\t| %lf | \r\n",vector[i]);
+    }
+    printf("\n");
+}
+
 /*
  * Seeks first non-zero value in colum <col>, below row<row>.
  * Than it swaps the part from <col> to <dim>  of this row with 
@@ -55,8 +68,11 @@ int seekAndSwap(double matrix[][4],double vector[],int row,int col,int dim){
 void multiplyAndKill(double matrix[][4],double vector[],
                      int source,int target,int col,int dim){
     int i;
-    
+
     double factor = matrix[source][col]/matrix[target][col];
+
+    printf("Matrix before change (factor will be: %f): \n",factor);
+    printSquareMatrixandVector(matrix,vector,dim);
 
     // multiply
     for(i=col;i<dim;i++){
@@ -64,13 +80,19 @@ void multiplyAndKill(double matrix[][4],double vector[],
     }
 
     vector[target] *= factor;
-
+    
+    printf("Matrix after multiply: \n");
+    printSquareMatrixandVector(matrix,vector,dim);
+    
     // kill
     for(i=col;i<dim;i++){
         matrix[target][i] -= matrix[source][i] ;
     }
 
     vector[target] -= vector[source];
+
+    printf("Matrix after kill: \n");
+    printSquareMatrixandVector(matrix,vector,dim);
 }
 
 /* 
