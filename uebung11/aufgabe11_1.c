@@ -6,8 +6,13 @@
 #define ANZ 24
 
 /*
- * Usage: If argument given, it will be threated as file with the correct number
- *        of entries;
+ * Usage: 
+ *          If argument given, it will be threated as file with the correct 
+ *          number of entries (24).
+ *
+ * Remarks:
+ *          Formular taken from wikipedia, since i didn't could attend class, 
+ *          due to a seminar.
  */
 
 
