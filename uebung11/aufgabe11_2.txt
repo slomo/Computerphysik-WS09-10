@@ -16,4 +16,12 @@ factor of PI. But this maybe is a coincidence.
   1518570.183086
 /  483011.430824
 ________________
-3.14159265358979
+3.14396324015639
+
+
+The hubble constant behaves simmilar but its value decreases.
+
+    6.585142e+02
+/   2.070344e+03
+_______________
+3.1439625751426
