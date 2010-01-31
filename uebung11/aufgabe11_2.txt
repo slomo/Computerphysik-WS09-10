@@ -1,0 +1,19 @@
+Output for calculation with the 4 values where d=2.0
+$ ./a.out univers.data
+y=6.585142e+02*x + -2.270284e+02
+Age of the universe: 1518570.183086 Billion years
+Coefficient of determination 1.000000
+
+Output for calculation without the 4 values where d=2.0
+$ ./a.out univers_without_the_4_outlaws.data 
+y=2.070344e+03*x + -1.150344e+03
+Age of the universe: 483011.430824 Billion years
+Coefficient of determination 1.000000
+
+The difference of the approximate age of the universe differs by around the
+factor of PI. But this maybe is a coincidence.
+
+  1518570.183086
+/  483011.430824
+________________
+3.14159265358979
