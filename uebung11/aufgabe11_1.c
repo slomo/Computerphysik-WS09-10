@@ -43,6 +43,7 @@ int main(int argc, char** argv)
         for(i=0;i<ANZ;i++){
             fscanf(file,"%lf %lf\n",&xi[i],&yi[i]);
         }
+        fclose(file);
     }
     else{
         printf("Please specify file to read from\n!");
