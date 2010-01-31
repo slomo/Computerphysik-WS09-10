@@ -1,0 +1,10 @@
+#set yrange[-2:7]
+#set xrange[-1:1]
+
+#set terminal postscript eps enhanced color solid rounded
+set out "aufgabe3-2based22.esp"
+plot 6.585142e+02*x + -2.270284e+02 title "H0*d+v0"\
+    , "univers.data" with points title "points"\
+
+pause -1
+#!epstopdf aufgabe3-2based22.esp && rm aufgabe3-2based22.esp
