@@ -42,12 +42,11 @@ int main(int argc, char** argv)
         file = fopen(argv[1],"r");
         for(i=0;i<ANZ;i++){
             fscanf(file,"%lf %lf\n",&xi[i],&yi[i]);
-            //printf("%lf %lf\n",xi[i],yi[i]);
         }
     }
     else{
         printf("Please specify file to read from\n!");
-        return EXIT_SUCCESS;
+        return EXIT_FAILURE;
     }
 
     // Computation for lineare Regression
