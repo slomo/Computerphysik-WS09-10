@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     
     FILE *file;
 
-    double a, b, sum1=0, sum2=0, xAvg,yAvg;
+    double a, b, sum1=0, sum2=0, xAvg,yAvg,r2;
 
     int i;
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         file = fopen(argv[1],"r");
         for(i=0;i<ANZ;i++){
             fscanf(file,"%lf %lf\n",&xi[i],&yi[i]);
-            printf("%lf %lf\n",xi[i],yi[i]);
+            //printf("%lf %lf\n",xi[i],yi[i]);
         }
     }
     else{
@@ -50,6 +50,7 @@ int main(int argc, char** argv)
         return EXIT_SUCCESS;
     }
 
+    // Computation for lineare Regression
     xAvg = avgOfList(xi,ANZ); 
     yAvg = avgOfList(yi,ANZ);
     
@@ -63,7 +64,19 @@ int main(int argc, char** argv)
 
     printf("y=%e*x + %e\n",a,b);
 
-    printf("Age of the universe: %lf Billion years",1/(a/powl(10.0,9)));
+    printf("Age of the universe: %Lf Billion years\n",1/(a/powl(10.0,9)));
+    
+    
+    // Computation for the coefficient of determination
+    
+    for(i=0;i<ANZ;i++){
+        sum1 = powl(yi[i] - (a*xi[i]+b),2);
+        sum2 = powl(yi[i] - yAvg,2);
+    }
+
+    r2 = 1 - (sum1/sum2);
+
+    printf("Coefficient of determination %lf\n",r2);
 
     return EXIT_SUCCESS;
 }
