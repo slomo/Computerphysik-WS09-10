@@ -1,0 +1,10 @@
+#set yrange[-2:7]
+#set xrange[-1:1]
+
+set terminal postscript eps enhanced color solid rounded
+set out "aufgabe11_2.esp"
+plot 2.070344e+03*x + -1.150344e+03 title "H0*d+v0"\
+    , "univers_without_the_4_outlaws.data" with points title "points"\
+
+#pause -1
+!epstopdf aufgabe11_2.esp && rm aufgabe11_2.esp
