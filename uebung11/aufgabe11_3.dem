@@ -1,0 +1,10 @@
+#set yrange[-2:7]
+#set xrange[-1:1]
+
+set terminal postscript eps enhanced color solid rounded
+set out "aufgabe11_3.esp"
+plot  -7.349951e-01*x + 1.129781e+00  title "f(x)"\
+    , "data.dat" with points title "points"\
+
+#pause -1
+!epstopdf aufgabe11_3.esp && rm aufgabe11_3.esp

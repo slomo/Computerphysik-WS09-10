@@ -1,0 +1,12 @@
+Result.
+
+f(x) = -7.349951e-01*x + 1.129781e+00
+Coefficient of determination 1.000000
+
+
+It seems to be a perfect fit, but a look on the plotted values reveals,
+that the functions doesent behave linear. It has a linear part right in
+the middle of the given interval, where the fit is near perferct. 
+
+
+The vaules of vary on both sides, so that R2 becomes 1.
