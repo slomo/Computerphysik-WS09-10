@@ -25,3 +25,7 @@ The hubble constant behaves simmilar but its value decreases.
 /   2.070344e+03
 _______________
 3.1439625751426
+
+
+
+The  value differs by 300 %, so the input should be way more accurat.
